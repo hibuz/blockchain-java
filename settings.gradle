@@ -1,0 +1,3 @@
+rootProject.name = 'blockchain'
+include ':chain-core'
+include ':demo-web'

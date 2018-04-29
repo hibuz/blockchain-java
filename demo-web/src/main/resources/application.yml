@@ -1,0 +1,9 @@
+logging:
+  level:
+   com.hibuz: debug
+rpc.target: localhost:6565
+---
+spring:
+  profiles: prod
+
+rpc.target: grpc.hibuz.com:6565

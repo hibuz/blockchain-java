@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.hibuz.blockchain.proto";
+
+message Block {
+    string prev_hash = 2;
+    int64 height = 1;
+    string msg = 3;
+}
+
+message BlockList {
+    repeated Block block = 1;
+}
+
+service BlockService {
+    rpc write(Block) returns (Block);
+    rpc sync(Block) returns (BlockList);
+}

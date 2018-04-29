@@ -1,0 +1,127 @@
+ext {
+	springCloudVersion = 'Finchley.RC1'
+	grpcSpringBootStarterVersion = '2.3.1'
+	grpcVersion = '1.11.0'
+	protobufVersion = '3.5.1-1'
+	commonsCodecVersion = '1.11'
+	jacksonVersion = '2.9.5'
+	swaggerVersion = '2.9.0'	
+}
+
+buildscript {
+	ext {
+		springBootVersion = '2.0.1.RELEASE'
+		protobufGradlePluginVersion = '0.8.5'
+		dockerGradlePluginVersion = '0.19.2'
+	}
+	repositories {
+		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		classpath "com.google.protobuf:protobuf-gradle-plugin:${protobufGradlePluginVersion}"
+		classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:${dockerGradlePluginVersion}"
+	}
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+group = 'com.hibuz.blockchain'
+version = '0.0.1-SNAPSHOT'
+
+defaultTasks 'bootRun'
+
+allprojects {
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven { url "https://repo.spring.io/milestone" }
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'com.palantir.docker'
+
+	sourceCompatibility = 1.8
+
+	dependencies {
+		compile('org.springframework.boot:spring-boot-starter')
+
+		runtime('org.springframework.boot:spring-boot-devtools')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+	sourceSets {
+		main {
+			java {
+				srcDirs 'src/main/java'
+			}
+		}
+	}
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		}
+	}
+	docker {
+		dependsOn build
+		name "hibuz.com/${bootJar.baseName}"
+		files bootJar.archivePath
+		buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
+	}
+}
+
+project(':chain-core') {
+	apply plugin: 'com.google.protobuf'
+
+	dependencies {
+		compile "io.grpc:grpc-netty:${grpcVersion}"
+		compile "io.grpc:grpc-protobuf:${grpcVersion}"
+		compile "io.grpc:grpc-stub:${grpcVersion}"
+		compile "org.lognet:grpc-spring-boot-starter:${grpcSpringBootStarterVersion}"
+		compile "commons-codec:commons-codec:${commonsCodecVersion}"
+		compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+		
+		testCompile "io.grpc:grpc-testing:${grpcVersion}"
+
+	}
+	protobuf {
+		protoc {
+			artifact = "com.google.protobuf:protoc:${protobufVersion}"
+		}
+		plugins {
+			grpc {
+				artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+			}
+		}
+		generateProtoTasks {
+			all()*.plugins {
+				grpc {}
+			}
+		}
+	}
+	sourceSets {
+		main {
+			java {
+				srcDirs 'build/generated/source/proto/main/grpc'
+				srcDirs 'build/generated/source/proto/main/java'
+			}
+		}
+	}
+}
+
+project(':demo-web') {
+
+	dependencies {
+		compile project(':chain-core')
+		compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+		compile "io.springfox:springfox-swagger2:${swaggerVersion}"
+		compile "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+	}
+}
