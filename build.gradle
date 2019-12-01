@@ -1,16 +1,16 @@
 ext {
-	springCloudVersion = 'Finchley.RC1'
-	grpcSpringBootStarterVersion = '2.3.1'
-	grpcVersion = '1.11.0'
-	protobufVersion = '3.5.1-1'
-	commonsCodecVersion = '1.11'
-	jacksonVersion = '2.9.5'
-	swaggerVersion = '2.9.0'	
+	springCloudVersion = 'Hoxton.RELEASE'
+	grpcSpringBootStarterVersion = '3.4.1'
+	grpcVersion = '1.25.0'
+	protobufVersion = '3.9.0'
+	commonsCodecVersion = '1.13'
+	jacksonVersion = '2.10.0'
+	swaggerVersion = '2.9.2'
 }
 
 buildscript {
 	ext {
-		springBootVersion = '2.0.1.RELEASE'
+		springBootVersion = '2.2.1.RELEASE'
 		protobufGradlePluginVersion = '0.8.5'
 		dockerGradlePluginVersion = '0.19.2'
 	}
@@ -84,10 +84,10 @@ project(':chain-core') {
 		compile "io.grpc:grpc-netty:${grpcVersion}"
 		compile "io.grpc:grpc-protobuf:${grpcVersion}"
 		compile "io.grpc:grpc-stub:${grpcVersion}"
-		compile "org.lognet:grpc-spring-boot-starter:${grpcSpringBootStarterVersion}"
+		compile "io.github.lognet:grpc-spring-boot-starter:${grpcSpringBootStarterVersion}"
 		compile "commons-codec:commons-codec:${commonsCodecVersion}"
 		compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-		
+
 		testCompile "io.grpc:grpc-testing:${grpcVersion}"
 
 	}
