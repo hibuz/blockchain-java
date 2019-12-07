@@ -31,11 +31,13 @@ To launch your application's tests, run:
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
 
-    ./gradlew :chain-core:build docker
+    ./gradlew :demo-web:jar
+    cd demo-web
+    docker build -t hibuz/blockchain-java .
 
 Then run:
 
-    docker run -rm -p 6565:6565 hibuz.com/chain-core
+    docker run --rm -p 80:80 hibuz/blockchain-java
 
 
 ## Rest APIs
