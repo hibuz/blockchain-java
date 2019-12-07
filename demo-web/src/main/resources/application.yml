@@ -6,4 +6,6 @@ rpc.target: localhost:6565
 spring:
   profiles: prod
 
-rpc.target: grpc.hibuz.com:6565
+rpc.target: 13.209.48.138:6565
+server:
+  port: 80

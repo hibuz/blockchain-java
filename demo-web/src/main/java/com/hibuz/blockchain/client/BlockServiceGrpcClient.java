@@ -34,6 +34,7 @@ public class BlockServiceGrpcClient {
 
 	@PostConstruct
 	private void init() {
+		log.info("RPC target=" + target);
 		ManagedChannel managedChannel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
 		String remoteHost = "unknown";
 		try {
