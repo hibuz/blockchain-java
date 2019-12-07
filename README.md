@@ -9,8 +9,8 @@ To start your application in the dev profile, simply run:
 
 
 ## Building for production
-
 To optimize the blockchain demo application for production, run:
+[![Actions Status](https://github.com/hibuz/blockchain-java/workflows/Java%20CI/badge.svg)](https://github.com/hibuz/blockchain-java/actions)
 
     ./gradlew -Pprod :chain-core:clean :chain-core:build
 
