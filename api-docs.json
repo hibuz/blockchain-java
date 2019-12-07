@@ -36,7 +36,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BlockWapper"
+                "$ref": "#/definitions/BlockWrapper"
               }
             }
           },
@@ -79,7 +79,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BlockWapper"
+                "$ref": "#/definitions/BlockWrapper"
               }
             }
           },
@@ -118,7 +118,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BlockWapper"
+                "$ref": "#/definitions/BlockWrapper"
               }
             }
           },
@@ -140,7 +140,7 @@
     }
   },
   "definitions": {
-    "BlockWapper": {
+    "BlockWrapper": {
       "type": "object",
       "properties": {
         "height": {
@@ -154,7 +154,7 @@
           "type": "string"
         }
       },
-      "title": "BlockWapper"
+      "title": "BlockWrapper"
     },
     "ModelAndView": {
       "type": "object",

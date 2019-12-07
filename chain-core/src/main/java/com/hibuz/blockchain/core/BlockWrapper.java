@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.hibuz.blockchain.proto.Block;
 
 @JsonPropertyOrder({ "prev_hash", "height", "msg" })
-public class BlockWapper {
+public class BlockWrapper {
 
 	@JsonIgnore
 	Block block;
@@ -32,9 +32,9 @@ public class BlockWapper {
 		return block.getMsg();
 	}
 
-	public static BlockWapper of(Block block) {
-		BlockWapper wapper = new BlockWapper();
-		wapper.setBlock(block);
-		return wapper;
+	public static BlockWrapper of(Block block) {
+		BlockWrapper wrapper = new BlockWrapper();
+		wrapper.setBlock(block);
+		return wrapper;
 	}
 }

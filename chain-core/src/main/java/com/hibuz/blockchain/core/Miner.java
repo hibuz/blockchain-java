@@ -1,22 +1,21 @@
 package com.hibuz.blockchain.core;
 
-import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.MinimalPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.hibuz.blockchain.proto.Block;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 interface Miner {
-	static final Logger log = LoggerFactory.getLogger(Miner.class);
-	static final ObjectWriter writer = new ObjectMapper().writer(RecruitPrinter.INSTANCE);
+	Logger log = LoggerFactory.getLogger(Miner.class);
+	ObjectWriter writer = new ObjectMapper().writer(RecruitPrinter.INSTANCE);
 
-	public static void assertion(Block prevBlock, Block newBlock) {
+	static void assertion(Block prevBlock, Block newBlock) {
 		if (prevBlock.getHeight() + 1 != newBlock.getHeight()) {
 			throw new InvalidBlockException(newBlock.getHeight() + " is not valid.");
 		} else if (!newBlock.getPrevHash().equals(pow(prevBlock))) {
@@ -24,10 +23,10 @@ interface Miner {
 		}
 	}
 
-	public static String pow(Block block) {
+	static String pow(Block block) {
 		String json;
 		try {
-			json = writer.writeValueAsString(BlockWapper.of(block));
+			json = writer.writeValueAsString(BlockWrapper.of(block));
 			return HashUtils.hashString(json);
 		} catch (JsonProcessingException e) {
 			log.error(e.getMessage(), e);
@@ -35,7 +34,7 @@ interface Miner {
 		return null;
 	}
 
-	static class RecruitPrinter extends MinimalPrettyPrinter {
+	class RecruitPrinter extends MinimalPrettyPrinter {
 		private static final long serialVersionUID = 1L;
 
 		static final RecruitPrinter INSTANCE = new RecruitPrinter();
