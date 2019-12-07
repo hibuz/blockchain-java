@@ -71,7 +71,7 @@ subprojects {
 	}
 	docker {
 		dependsOn build
-		name "hibuz.com/${bootJar.baseName}"
+		name "hibuz/${bootJar.baseName}"
 		files bootJar.archivePath
 		buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
 	}
@@ -91,6 +91,11 @@ project(':chain-core') {
 		testCompile "io.grpc:grpc-testing:${grpcVersion}"
 
 	}
+
+	jar {
+		enabled = true
+	}
+
 	protobuf {
 		protoc {
 			artifact = "com.google.protobuf:protoc:${protobufVersion}"
