@@ -1,5 +1,5 @@
 ext {
-	springCloudVersion = 'Hoxton.RELEASE'
+	springCloudVersion = 'Hoxton.SR2'
 	grpcSpringBootStarterVersion = '3.4.1'
 	grpcVersion = '1.25.0'
 	protobufVersion = '3.9.0'
@@ -10,9 +10,9 @@ ext {
 
 buildscript {
 	ext {
-		springBootVersion = '2.2.1.RELEASE'
+		springBootVersion = '2.2.4.RELEASE'
 		protobufGradlePluginVersion = '0.8.5'
-		dockerGradlePluginVersion = '0.19.2'
+		jibGradlePluginVersion = '2.1.0'
 	}
 	repositories {
 		mavenCentral()
@@ -23,7 +23,7 @@ buildscript {
 	dependencies {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 		classpath "com.google.protobuf:protobuf-gradle-plugin:${protobufGradlePluginVersion}"
-		classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:${dockerGradlePluginVersion}"
+		classpath "com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin:${jibGradlePluginVersion}"
 	}
 }
 
@@ -47,7 +47,7 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'org.springframework.boot'
-	apply plugin: 'com.palantir.docker'
+	apply plugin: 'com.google.cloud.tools.jib'
 
 	sourceCompatibility = 1.8
 
@@ -68,12 +68,6 @@ subprojects {
 		imports {
 			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 		}
-	}
-	docker {
-		dependsOn build
-		name "hibuz/${bootJar.baseName}"
-		files bootJar.archivePath
-		buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
 	}
 }
 
