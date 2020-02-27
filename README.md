@@ -12,11 +12,11 @@ To start your application in the dev profile, simply run:
 To optimize the blockchain demo application for production, run:
 [![Actions Status](https://github.com/hibuz/blockchain-java/workflows/Java%20CI/badge.svg)](https://github.com/hibuz/blockchain-java/actions)
 
-    ./gradlew -Pprod :chain-core:clean :chain-core:build
+    ./gradlew -Pprod clean build
 
 To ensure everything worked, run:
 
-    java -jar chain-core/build/libs/*.jar
+    java -jar demo-web/build/libs/*.jar
 
 
 ## Testing
@@ -31,13 +31,13 @@ To launch your application's tests, run:
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
 
-    ./gradlew :demo-web:jar
-    cd demo-web
-    docker build -t hibuz/blockchain-java .
+    ./gradlew :chain-core:jibDockerBuild --image=hibuz/chain-core
+    ./gradlew :demo-web:jibDockerBuild --image=hibuz/demo-web
 
 Then run:
 
-    docker run --rm -p 80:80 hibuz/blockchain-java
+    docker run --rm -p 6565:6565 hibuz/chain-core
+    docker run --rm -p 8080:8080 hibuz/demo-web
 
 
 ## Rest APIs
@@ -53,6 +53,6 @@ POST	| /api/recruit	| create newBlock with generated recruit email
 
 ## For demo
 
- * block chain demo web server#1: https://hibuz.com
- * block chain demo web server#2: http://grpc.hibuz.com:8080
- * block chain grpc server: grpc.hibuz.com:6565
+ * block chain demo web api test: https://ainize.ai/hibuz/blockchain-java
+ * block chain demo web server: https://blockchain-java.hibuz.endpoint.ainize.ai
+ * block chain grpc server: hibuz.com:6565
