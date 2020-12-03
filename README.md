@@ -53,6 +53,6 @@ POST	| /api/recruit	| create newBlock with generated recruit email
 
 ## For demo
 
- * block chain demo web api test: https://ainize.ai/hibuz/blockchain-java
- * block chain demo web server: https://blockchain-java.hibuz.endpoint.ainize.ai
+ * block chain demo web api test: https://v1.ainize.ai/hibuz/blockchain-java
+ * block chain demo web server: https://blockchain-java-hibuz.endpoint.ainize.ai
  * block chain grpc server: hibuz.com:6565
