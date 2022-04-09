@@ -5,18 +5,18 @@ This is a Block Chain Demo Application
 
 To start your application in the dev profile, simply run:
 
-    ./gradlew
+    ./gradlew :chain-core:bootRun
 
 
 ## Building for production
 To optimize the blockchain demo application for production, run:
 [![Actions Status](https://github.com/hibuz/blockchain-java/workflows/Java%20CI/badge.svg)](https://github.com/hibuz/blockchain-java/actions)
 
-    ./gradlew -Pprod clean build
+    ./gradlew :demo-web:clean :demo-web:bootJar
 
 To ensure everything worked, run:
 
-    java -jar demo-web/build/libs/*.jar
+    java -jar -Dspring.profiles.active=prod demo-web/build/libs/*.jar
 
 
 ## Testing
