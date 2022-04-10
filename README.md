@@ -30,22 +30,40 @@ To launch your application's tests, run:
 
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
-
-    ./gradlew :chain-core:jibDockerBuild --image=hibuz/chain-core
-    ./gradlew :demo-web:jibDockerBuild --image=hibuz/demo-web
+- chain-core
+```bash
+docker build --build-arg JAR_FILE=chain-core/build/libs/\*.jar -t hibuz/chain-core -f chain-core/Dockerfile .
+```
+- demo-web
+```bash
+docker build --build-arg JAR_FILE=demo-web/build/libs/\*.jar -t hibuz/demo-web -f demo-web/Dockerfile .
+```
+You can also dockerize in the subfolder
+```bash
+cd demo-web
+docker build -t hibuz/demo-web .
+```
 
 Then run:
-
-    docker run --rm -p 6565:6565 hibuz/chain-core
-    docker run --rm -p 8080:8080 hibuz/demo-web
+- chain-core
+```bash
+docker run --rm -p 6565:6565 hibuz/chain-core
+```
+- demo-web
+```bash
+docker run --rm --network host hibuz/demo-web
+```
+You can do the same for the `prod` profile:
+```bash
+docker run --rm -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 hibuz/demo-web
+```
 
 
 ## Rest APIs
 
-
 Method	| Path	| Description	|  
 ------------- | ------------------------- | ------------- |
-GET	| /	| Redirect to /swagger-ui.html
+GET	| /	| Redirect to /swagger-ui/index.html
 GET	| /api/	| Get block chain info
 POST	| /api/?msg={msg}	| create newBlock with msg
 POST	| /api/recruit	| create newBlock with generated recruit email
