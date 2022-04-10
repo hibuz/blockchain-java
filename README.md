@@ -43,6 +43,9 @@ You can also dockerize in the subfolder
 cd demo-web
 docker build -t hibuz/demo-web .
 ```
+build a github registry docker image by running:
+
+    docker build --rm -t ghcr.io/hibuz/demo-web .
 
 Then run:
 - chain-core
