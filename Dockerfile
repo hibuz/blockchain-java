@@ -2,7 +2,7 @@
 FROM adoptopenjdk/openjdk11:alpine-slim as build
 WORKDIR /workspace/app
 COPY . /workspace/app
-RUN --mount=type=cache,target=/root/.gradle ./gradlew :demo-web:clean :demo-web:bootJar
+RUN ./gradlew :demo-web:clean :demo-web:bootJar
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../../demo-web/build/libs/*.jar)
 
 
