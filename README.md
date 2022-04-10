@@ -1,4 +1,4 @@
-# BlockChain Demo [![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=github.com/hibuz/blockchain-java)
+# BlockChain Demo [![Run on Ainize](https://ainize.ai/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=https://github.com/hibuz/blockchain-java)
 This is a Block Chain Demo Application
 
 ## Development
@@ -74,6 +74,5 @@ POST	| /api/recruit	| create newBlock with generated recruit email
 
 ## For demo
 
- * block chain demo web api test: https://v1.ainize.ai/hibuz/blockchain-java
- * block chain demo web server: https://blockchain-java-hibuz.endpoint.ainize.ai
- * block chain grpc server: hibuz.com:6565
+ * Blockchain Demo web server(demo-web): https://ainize-blockchain-java-hibuz.endpoint.ainize.ai
+ * Blockchain Demo grpc server(chain-core): hibuz.com:6565
