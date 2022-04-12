@@ -43,9 +43,6 @@ You can also dockerize in the subfolder
 cd demo-web
 docker build -t hibuz/demo-web .
 ```
-build a github registry docker image by running:
-
-    docker build --rm -t ghcr.io/hibuz/demo-web .
 
 Then run:
 - chain-core
@@ -56,9 +53,9 @@ docker run --rm -p 6565:6565 hibuz/chain-core
 ```bash
 docker run --rm --network host hibuz/demo-web
 ```
-You can do the same for the `prod` profile:
+To use Github Container Registry\`s `arm64` image with `prod` profile, run:
 ```bash
-docker run --rm -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 hibuz/demo-web
+docker run --rm -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 ghcr.io/hibuz/demo-web
 ```
 
 
