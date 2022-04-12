@@ -1,12 +1,11 @@
-# syntax=docker/dockerfile:experimental
-FROM adoptopenjdk/openjdk11:alpine-slim as build
+FROM openjdk:11-jdk-slim as build
 WORKDIR /workspace/app
 COPY . /workspace/app
 RUN ./gradlew :demo-web:clean :demo-web:bootJar
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../../demo-web/build/libs/*.jar)
 
 
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM openjdk:11-jre-slim
 LABEL org.opencontainers.image.source https://github.com/hibuz/blockchain-java
 LABEL org.opencontainers.image.authors "hibuz@hibuz.com"
 

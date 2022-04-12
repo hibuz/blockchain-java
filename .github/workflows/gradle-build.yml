@@ -1,0 +1,27 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: develop
+  pull_request:
+    branches: develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+          cache: 'gradle'
+
+      - name: Build chain-core with Gradle
+        run: ./gradlew :chain-core:clean :chain-core:bootJar
+
+      - name: Build chain-core with Gradle
+        run: ./gradlew :demo-web:clean :demo-web:bootJar
