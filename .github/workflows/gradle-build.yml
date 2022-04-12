@@ -23,5 +23,5 @@ jobs:
       - name: Build chain-core with Gradle
         run: ./gradlew :chain-core:clean :chain-core:bootJar
 
-      - name: Build chain-core with Gradle
+      - name: Build demo-web with Gradle
         run: ./gradlew :demo-web:clean :demo-web:bootJar
